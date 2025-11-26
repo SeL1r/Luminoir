@@ -3,11 +3,12 @@ using UnityEngine.InputSystem;
 
 public class CharacterManager : MonoBehaviour
 {
-	[SerializeField] private GameObject mainCamera;
+	[SerializeField] private GameObject head;
 	private InputAction IAMove, IALook;
 	private Rigidbody rb;
-	private int speedCharacter = 4;
+	private int speedCharacter = 2;
 	[SerializeField] private SettingsManager settingsManager;
+	private float maxHeadAngle;
 	
 	
 	void Start()
@@ -35,18 +36,18 @@ public class CharacterManager : MonoBehaviour
 	private void MoveCharacter()
 	{
 		Vector2 valueVelocity = IAMove.ReadValue<Vector2>();
-		Vector3 move = new Vector3(valueVelocity.x * speedCharacter, rb.linearVelocity.y, valueVelocity.y * speedCharacter);
-		Vector3 moveVelocity = transform.TransformDirection(move);
-		rb.linearVelocity = moveVelocity;
+		Vector3 move = transform.rotation * new Vector3(valueVelocity.x * speedCharacter, rb.linearVelocity.y, valueVelocity.y * speedCharacter);
+		rb.linearVelocity = move;
 	}
 	
 	private void RotateCharacter()
 	{
-		Vector2 valueRotate = IALook.ReadValue<Vector2>();
-		Vector3 valueRotateY = new Vector3(0, valueRotate.x * Time.deltaTime * settingsManager.Sensitivity, 0);
-		Vector3 valueRotateX = new Vector3(-valueRotate.y * Time.deltaTime * settingsManager.Sensitivity, 0, 0);
-		gameObject.transform.Rotate(valueRotateY, Space.Self);
-		mainCamera.transform.Rotate(valueRotateX, Space.Self);
-		
+		Vector2 mouseDelta = IALook.ReadValue<Vector2>() * Time.deltaTime * settingsManager.Sensitivity;
+		if (mouseDelta != Vector2.zero)
+		{
+			maxHeadAngle = Mathf.Clamp(maxHeadAngle - mouseDelta.y, -70, 55);
+			head.transform.localRotation = Quaternion.Euler(maxHeadAngle, 0, 0);
+			transform.Rotate(0, mouseDelta.x, 0);
+		}		
 	}
 }

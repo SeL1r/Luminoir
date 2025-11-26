@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SettingsManager : MonoBehaviour
 {
-	private float _sensitivity = 1;
+	private float _sensitivity = 5;
 	public float Sensitivity
 	{
 		get 
@@ -12,7 +12,7 @@ public class SettingsManager : MonoBehaviour
 		set 
 		{ 
 			_sensitivity = value;
-			_sensitivity = Mathf.Clamp(_sensitivity, 1, 15);
+			_sensitivity = Mathf.Clamp(_sensitivity, 1, 20);
 			PlayerPrefs.SetFloat("_sensitivity", _sensitivity); 
 		}
 	}
