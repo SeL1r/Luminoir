@@ -45,7 +45,7 @@ public class CharacterManager : MonoBehaviour
 		Vector2 mouseDelta = IALook.ReadValue<Vector2>() * Time.deltaTime * settingsManager.Sensitivity;
 		if (mouseDelta != Vector2.zero)
 		{
-			maxHeadAngle = Mathf.Clamp(maxHeadAngle - mouseDelta.y, -70, 55);
+			maxHeadAngle = Mathf.Clamp(maxHeadAngle - mouseDelta.y, -75, 75);
 			head.transform.localRotation = Quaternion.Euler(maxHeadAngle, 0, 0);
 			transform.Rotate(0, mouseDelta.x, 0);
 		}		
