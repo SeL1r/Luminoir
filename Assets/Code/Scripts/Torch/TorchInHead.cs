@@ -1,23 +1,24 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TorchInHead : MonoBehaviour
 {
 	[SerializeField] private Torch torch;
 	[SerializeField] private CharacterManager characterManager;
-	private Light lightTorch;
-	private bool isTorch = true, isActive = true;
+	[SerializeField] private Light lightTorch;
+	[SerializeField] private Image chargeBar;
+	public bool isTorch {get; private set;} = true;
+	private bool isPicked = false;
+	public float charge = 7;
 	
 	
-	private void Start()
-	{
-		lightTorch = GetComponent<Light>();
-	}
 	void Update()
 	{
-		if(torch.isInteract && isActive)
+		if(torch.isInteract)
 		{
 			RaiseTorch(); 
-			torch.isInteract = false;	 	
+			torch.isInteract = false;	
+			isPicked = true;
 		}
 		ActiveTorch();
 	}
@@ -28,6 +29,10 @@ public class TorchInHead : MonoBehaviour
 	
 	private void ActiveTorch()
 	{
+		if (!isPicked)
+		{
+			return;
+		}
 		if (characterManager.IAActiveTorch.WasPressedThisFrame())
 		{
 			if (isTorch)
@@ -41,5 +46,11 @@ public class TorchInHead : MonoBehaviour
 				isTorch = true;
 			}
 		}
+		if (isTorch)
+		{
+			charge = Mathf.MoveTowards(charge, 0, 0.05f * Time.deltaTime);
+		}
+		lightTorch.intensity = charge;
+		chargeBar.fillAmount = charge/7;
 	}
 }

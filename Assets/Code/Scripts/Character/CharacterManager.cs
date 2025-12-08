@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -13,6 +14,21 @@ public class CharacterManager : MonoBehaviour
 	private float maxHeadAngle;
 	public GameObject hitObject {get;private set;} 
 	[SerializeField] private LayerMask interactableLayer;
+	[SerializeField] private Image sanityImage;
+	private float _sanity = 100;
+	public float Sanity 
+	{
+		get
+		{
+			return _sanity;
+		}
+		set
+		{
+			_sanity = value;
+			_sanity = Mathf.Clamp(_sanity, 0, 100);
+		}
+	}
+	[SerializeField] private Light lightTorch;
 	
 	
 	void Start()
@@ -39,6 +55,7 @@ public class CharacterManager : MonoBehaviour
 		RotateCharacter();
 		Raycast();
 		Interact();
+		SanityReduction();
 	}
 	
 	private void MoveCharacter()
@@ -77,12 +94,20 @@ public class CharacterManager : MonoBehaviour
 			return;
 		}
 		if(hitObject == null)
-        {
-            return;
-        }
+		{
+			return;
+		}
 		if(hitObject.TryGetComponent<IInteractable>(out IInteractable interactable))
 		{
 			interactable.InteractObject();
 		}
+	}
+	private void SanityReduction()
+	{
+		if (lightTorch.intensity <= 0.001 || !lightTorch.enabled)
+		{
+			Sanity = Mathf.MoveTowards(Sanity, 0, 1 * Time.deltaTime);
+		}
+		sanityImage.fillAmount = Sanity / 100;
 	}
 }
