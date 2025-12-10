@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Pills : MonoBehaviour, IInteractable
 {
-	[SerializeField] private CharacterManager characterManager;
+	[SerializeField] private CharacterSanity characterSanity;
 	public void InteractObject()
 	{
-		characterManager.Sanity += 30;
+		characterSanity.Sanity += 30;
 		gameObject.SetActive(false);
 	}
 }

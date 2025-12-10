@@ -5,30 +5,14 @@ using UnityEngine.UI;
 public class CharacterManager : MonoBehaviour
 {
 	[SerializeField] private GameObject head;
-	private InputAction IAMove, IALook;
-	public InputAction IAInteract{get; private set;}
-	public InputAction IAActiveTorch{get; private set;}
+	private InputAction IAMove, IALook, IAInteract, IADrop;
 	private Rigidbody rb;
 	private int speedCharacter = 2;
 	[SerializeField] private SettingsManager settingsManager;
 	private float maxHeadAngle;
 	public GameObject hitObject {get;private set;} 
 	[SerializeField] private LayerMask interactableLayer;
-	[SerializeField] private Image sanityImage;
-	private float _sanity = 100;
-	public float Sanity 
-	{
-		get
-		{
-			return _sanity;
-		}
-		set
-		{
-			_sanity = value;
-			_sanity = Mathf.Clamp(_sanity, 0, 100);
-		}
-	}
-	[SerializeField] private Light lightTorch;
+	[SerializeField] private CharacterArm characterArm;
 	
 	
 	void Start()
@@ -41,7 +25,7 @@ public class CharacterManager : MonoBehaviour
 	   IAMove = InputSystem.actions.FindAction("Move"); 
 	   IALook = InputSystem.actions.FindAction("Look");
 	   IAInteract = InputSystem.actions.FindAction("Interact");
-	   IAActiveTorch = InputSystem.actions.FindAction("ActiveTorch");
+	   IADrop = InputSystem.actions.FindAction("Drop");
 	   rb = GetComponent<Rigidbody>();
 	}
 
@@ -55,7 +39,7 @@ public class CharacterManager : MonoBehaviour
 		RotateCharacter();
 		Raycast();
 		Interact();
-		SanityReduction();
+		DropObject();
 	}
 	
 	private void MoveCharacter()
@@ -81,9 +65,13 @@ public class CharacterManager : MonoBehaviour
 		Vector3 centerPoint = new Vector3(Screen.width / 2, Screen.height / 2, 0);
 		Ray ray = Camera.main.ScreenPointToRay(centerPoint);
 		RaycastHit hit;
-		if (Physics.Raycast(ray, out hit, 2.1f, interactableLayer))
+		if (Physics.Raycast(ray, out hit, 2, interactableLayer))
 		{
 			hitObject = hit.collider.gameObject;
+		}
+		else
+		{
+			hitObject = null;
 		}
 	}
 	
@@ -102,12 +90,19 @@ public class CharacterManager : MonoBehaviour
 			interactable.InteractObject();
 		}
 	}
-	private void SanityReduction()
+	private void DropObject()
 	{
-		if (lightTorch.intensity <= 0.001 || !lightTorch.enabled)
+		if(!IADrop.WasPressedThisFrame())
 		{
-			Sanity = Mathf.MoveTowards(Sanity, 0, 1 * Time.deltaTime);
+			return;
 		}
-		sanityImage.fillAmount = Sanity / 100;
+		if(characterArm.objectInArm == null)
+		{
+			return;
+		}
+		if(characterArm.objectInArm.TryGetComponent<IDroptable>(out IDroptable idroptable))
+		{
+			idroptable.DropObject();
+		}
 	}
 }
