@@ -3,7 +3,7 @@ using UnityEngine;
 public class ObjectWhichDrop : MonoBehaviour, IDroptable, IInteractable
 {
 	private Rigidbody rb;
-	public CharacterController characterController {get; private set;}
+	public CharacterManager characterManager {get; private set;}
 	[SerializeField] private Transform arm;
 	[SerializeField] private Transform characterDropPos;
 	private float dropForce = 1;
@@ -15,7 +15,7 @@ public class ObjectWhichDrop : MonoBehaviour, IDroptable, IInteractable
 	private void InitializationVariables()
 	{
 	   rb = GetComponent<Rigidbody>();
-	   characterController = FindAnyObjectByType<CharacterController>();
+	   characterManager = FindAnyObjectByType<CharacterManager>();
 	}
 	public void DropObject()
 	{

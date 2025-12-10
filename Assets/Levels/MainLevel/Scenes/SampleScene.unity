@@ -7013,7 +7013,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Key
   arm: {fileID: 1094609100}
   characterDropPos: {fileID: 351738875}
-  myDoor: {fileID: 1005792197}
+  myDoor: {fileID: 3877179342737918537}
+  myTriggerDoor: {fileID: 1005792197}
 --- !u!1 &391842729 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4851217597381123305, guid: 54d6debc897909b4caee725b3cb3ea8f, type: 3}
@@ -7593,7 +7594,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Key
   arm: {fileID: 1094609100}
   characterDropPos: {fileID: 351738875}
-  myDoor: {fileID: 1005774435}
+  myDoor: {fileID: 3877179342034155832}
+  myTriggerDoor: {fileID: 1005774435}
 --- !u!1001 &425406191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9401,59 +9403,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8295591563862043288, guid: e01f2e62cf41a3449be2dade3b2c2d79, type: 3}
   m_PrefabInstance: {fileID: 1524999169}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &510944626 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 8295591563862043289, guid: e01f2e62cf41a3449be2dade3b2c2d79, type: 3}
-  m_PrefabInstance: {fileID: 1524999169}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &510944629
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272291826}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.4200003, y: 1.42, z: 2}
-  m_Center: {x: -0.00000047683716, y: 0, z: 0}
---- !u!54 &510944630
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272291826}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &512728504 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1275266641364890, guid: e3109ccf9db0f54408d5c02b496761c1, type: 3}
@@ -9600,7 +9549,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Key
   arm: {fileID: 1094609100}
   characterDropPos: {fileID: 351738875}
-  myDoor: {fileID: 1556044545}
+  myDoor: {fileID: 1541330349}
+  myTriggerDoor: {fileID: 1556044545}
 --- !u!1001 &515755957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12267,7 +12217,6 @@ GameObject:
   m_Component:
   - component: {fileID: 706748770}
   - component: {fileID: 706748773}
-  - component: {fileID: 706748772}
   - component: {fileID: 706748771}
   m_Layer: 0
   m_Name: ArmCam
@@ -12335,14 +12284,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!81 &706748772
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706748769}
-  m_Enabled: 1
 --- !u!20 &706748773
 Camera:
   m_ObjectHideFlags: 0
@@ -12980,7 +12921,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Key
   arm: {fileID: 1094609100}
   characterDropPos: {fileID: 351738875}
-  myDoor: {fileID: 498211873}
+  myDoor: {fileID: 3877179341644036954}
+  myTriggerDoor: {fileID: 498211873}
 --- !u!1 &751675641 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8711286799572983488, guid: 22ff43bb1f7c97f40a646ef9c1cb0cc0, type: 3}
@@ -18850,7 +18792,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Key
   arm: {fileID: 1094609100}
   characterDropPos: {fileID: 351738875}
-  myDoor: {fileID: 86218807}
+  myDoor: {fileID: 3877179341560757683}
+  myTriggerDoor: {fileID: 86218807}
 --- !u!1001 &1060160083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27984,8 +27927,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6650829155750549547, guid: e01f2e62cf41a3449be2dade3b2c2d79, type: 3}
+      propertyPath: Priority
+      value: 117
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650829155750549547, guid: e01f2e62cf41a3449be2dade3b2c2d79, type: 3}
       propertyPath: m_Volume
-      value: 0.3
+      value: 0.111
       objectReference: {fileID: 0}
     - target: {fileID: 6650829155750549547, guid: e01f2e62cf41a3449be2dade3b2c2d79, type: 3}
       propertyPath: m_Enabled
@@ -28057,14 +28004,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8295591563862043295, guid: e01f2e62cf41a3449be2dade3b2c2d79, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8295591563862043288, guid: e01f2e62cf41a3449be2dade3b2c2d79, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 510944630}
-    - targetCorrespondingSourceObject: {fileID: 8295591563862043295, guid: e01f2e62cf41a3449be2dade3b2c2d79, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 510944629}
+      addedObject: {fileID: 2020838201}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e01f2e62cf41a3449be2dade3b2c2d79, type: 3}
 --- !u!1001 &1527688706
 PrefabInstance:
@@ -30461,7 +30405,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Key
   arm: {fileID: 1094609100}
   characterDropPos: {fileID: 351738875}
-  myDoor: {fileID: 908895784}
+  myDoor: {fileID: 3877179341123405915}
+  myTriggerDoor: {fileID: 908895784}
 --- !u!1001 &1663548755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32780,7 +32725,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Key
   arm: {fileID: 1094609100}
   characterDropPos: {fileID: 351738875}
-  myDoor: {fileID: 579399340}
+  myDoor: {fileID: 3877179342712481717}
+  myTriggerDoor: {fileID: 579399340}
 --- !u!65 &1758319559
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36812,7 +36758,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Lighter
   arm: {fileID: 1094609100}
   characterDropPos: {fileID: 351738875}
-  fire: {fileID: 510944626}
+  fire: {fileID: 272291826}
+  fireTrigger: {fileID: 2020838200}
 --- !u!65 &1973218459
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37175,6 +37122,59 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.5107296, y: 0.040446084, z: 2.5077338}
   m_Center: {x: -0.00000011920929, y: 0.020223042, z: 0.000000059604645}
+--- !u!1 &2020838200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2020838201}
+  - component: {fileID: 2020838202}
+  m_Layer: 0
+  m_Name: FireTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2020838201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020838200}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.634}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 510944623}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2020838202
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020838200}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2021387651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37928,7 +37928,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.6965233, y: 0.04973936, z: 1.0777681}
-  m_Center: {x: 0.00000062584877, y: -0.01, z: 0.000000029802322}
+  m_Center: {x: 0.00000062584877, y: 0.01, z: 0.000000029802322}
 --- !u!1001 &2084898339
 PrefabInstance:
   m_ObjectHideFlags: 0
