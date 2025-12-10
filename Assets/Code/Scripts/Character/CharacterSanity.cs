@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class CharacterSanity : MonoBehaviour
 {
+	private float lossRateSanity = 1;
 	private float _sanity = 100;
 	public float Sanity 
 	{
@@ -28,7 +29,7 @@ public class CharacterSanity : MonoBehaviour
 	{
 		if (lightTorch.intensity <= 0.001 || !lightTorch.enabled)
 		{
-			Sanity = Mathf.MoveTowards(Sanity, 0, 1 * Time.deltaTime);
+			Sanity = Mathf.MoveTowards(Sanity, 0, lossRateSanity * Time.deltaTime);
 		}
 		sanityImage.fillAmount = Sanity / 100;
 	}

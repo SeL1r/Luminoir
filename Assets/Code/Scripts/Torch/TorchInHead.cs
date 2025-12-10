@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,12 +13,17 @@ public class TorchInHead : MonoBehaviour
 	private InputAction IAActiveTorch;
 	public bool isTorch {get; private set;} = true;
 	private bool isPicked = false;
+	public float maxChargeValue {get; private set;} = 7;
+	private float lossRateCharge = 0.05f;
+	private float minChargeValueEvent = 0.3f;
+	private int probabilityFlashingLight = 5;
 	public float charge = 7;
+	
 
 	void Start()
 	{
 		//InitializationVariables
-	    IAActiveTorch = InputSystem.actions.FindAction("ActiveTorch");
+		IAActiveTorch = InputSystem.actions.FindAction("ActiveTorch");
 		
 		StartCoroutine(FlashingLight());
 	}
@@ -57,7 +63,7 @@ public class TorchInHead : MonoBehaviour
 		}
 		if (isTorch)
 		{
-			charge = Mathf.MoveTowards(charge, 0, 0.05f * Time.deltaTime);
+			charge = Mathf.MoveTowards(charge, 0, lossRateCharge * Time.deltaTime);
 		}
 		lightTorch.intensity = charge;
 		chargeBar.fillAmount = charge/7;
@@ -69,11 +75,12 @@ public class TorchInHead : MonoBehaviour
 		{
 			yield return new WaitForSecondsRealtime(0.1f);
 			
-			if (!(chargeBar.fillAmount <= 0.3f))
+			if (!(chargeBar.fillAmount <= minChargeValueEvent))
 			{
 				continue;
 			}
-			if(!(Random.Range(0, 100) <= 5))
+			int probability = Random.Range(0, 100);
+			if(!(probability <= probabilityFlashingLight))
 			{
 				continue;
 			}
@@ -81,8 +88,8 @@ public class TorchInHead : MonoBehaviour
 			{
 				continue;
 			}
-			
-			for (int i = 0; i < Random.Range(1, 4); i++)
+			int qualityFlashingLight = Random.Range(1, 4);
+			for (int i = 0; i < qualityFlashingLight; i++)
 			{
 				lightTorch.enabled = false;
 				yield return new WaitForSecondsRealtime(0.1f);
