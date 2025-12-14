@@ -44,10 +44,7 @@ public class TorchInHead : MonoBehaviour
 	
 	private void ActiveTorch()
 	{
-		if (!isPicked)
-		{
-			return;
-		}
+		if (!isPicked){return;}
 		if (IAActiveTorch.WasPressedThisFrame())
 		{
 			if (isTorch)
@@ -75,19 +72,10 @@ public class TorchInHead : MonoBehaviour
 		{
 			yield return new WaitForSecondsRealtime(0.1f);
 			
-			if (!(chargeBar.fillAmount <= minChargeValueEvent))
-			{
-				continue;
-			}
+			if (!(chargeBar.fillAmount <= minChargeValueEvent)){continue;}
 			int probability = Random.Range(0, 100);
-			if(!(probability <= probabilityFlashingLight))
-			{
-				continue;
-			}
-			if (!isTorch)
-			{
-				continue;
-			}
+			if(!(probability <= probabilityFlashingLight)){continue;}
+			if (!isTorch){continue;}
 			int qualityFlashingLight = Random.Range(1, 4);
 			for (int i = 0; i < qualityFlashingLight; i++)
 			{

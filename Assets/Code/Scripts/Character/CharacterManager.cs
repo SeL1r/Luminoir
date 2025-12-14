@@ -97,10 +97,7 @@ public class CharacterManager : MonoBehaviour
 	
 	private void Interact()
 	{
-		if(!IAInteract.WasPressedThisFrame())
-		{
-			return;
-		}
+		if(!IAInteract.WasPressedThisFrame()) {return;}
 		InteractInteractable();
 		InteractDroptable();
 	}
@@ -117,14 +114,8 @@ public class CharacterManager : MonoBehaviour
 	}
 	private void InteractDroptable()
 	{
-		if(hitObjectDrop == null)
-		{
-			return;
-		}
-		if(characterArm.inArm)
-		{
-			return;
-		}
+		if(hitObjectDrop == null){return;}
+		if(characterArm.inArm){return;}
 		if(hitObjectDrop.TryGetComponent<IInteractable>(out IInteractable interactable1))
 		{
 			interactable1.InteractObject();
@@ -132,14 +123,8 @@ public class CharacterManager : MonoBehaviour
 	}
 	private void DropObject()
 	{
-		if(!IADrop.WasPressedThisFrame())
-		{
-			return;
-		}
-		if(characterArm.objectInArm == null)
-		{
-			return;
-		}
+		if(!IADrop.WasPressedThisFrame()){return;}
+		if(characterArm.objectInArm == null){return;}
 		if(characterArm.objectInArm.TryGetComponent<IDroptable>(out IDroptable idroptable))
 		{
 			idroptable.DropObject();
@@ -147,18 +132,9 @@ public class CharacterManager : MonoBehaviour
 	}
 	private void Active()
 	{
-		if(!IAActive.WasPressedThisFrame())
-		{
-		   return; 
-		}
-		if(characterArm.objectInArm == null)
-		{
-			return;
-		}
-		if(triggetForDropObject == null)
-		{
-			return;
-		}
+		if(!IAActive.WasPressedThisFrame()){return;}
+		if(characterArm.objectInArm == null){return;}
+		if(triggetForDropObject == null){return;}
 		if(characterArm.objectInArm.TryGetComponent<IActivate>(out IActivate iactivate))
 		{
 			iactivate.ActiveObject();

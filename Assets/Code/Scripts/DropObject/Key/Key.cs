@@ -8,10 +8,7 @@ public class Key : ObjectWhichDrop, IActivate
 	public void ActiveObject()
 	{
 		
-		if(characterManager.triggetForDropObject != myTriggerDoor)
-		{
-			return;
-		}
+		if(characterManager.triggetForDropObject != myTriggerDoor){return;}
 		transform.position = new Vector3(1000, 1000, 1000);
 		myTriggerDoor.SetActive(false);
 		StartCoroutine(OpenDoorWithDelay());

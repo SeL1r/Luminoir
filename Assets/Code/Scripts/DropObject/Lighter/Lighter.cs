@@ -4,16 +4,28 @@ using UnityEngine;
 public class Lighter : ObjectWhichDrop, IActivate
 {
 	[SerializeField] private GameObject fire;
-	[SerializeField] private GameObject fireTrigger;
+	[SerializeField] private GameObject fireTrigger, candleTrigger;
+	[SerializeField] private GameObject[] candle;
+	public bool isFire{get; private set;} = false;
+	public bool isCandle{get; private set;} = false;
 	public void ActiveObject()
 	{
-		if(characterManager.triggetForDropObject != fireTrigger)
+		if(characterManager.triggetForDropObject == fireTrigger)
 		{
-			return;
+			fireTrigger.SetActive(false);
+			fire.GetComponent<ParticleSystem>().Play();
+			fire.GetComponent<AudioSource>().enabled = true;
+			isFire = true;
 		}
-		fireTrigger.SetActive(false);
-		fire.GetComponent<ParticleSystem>().Play();
-		fire.GetComponent<AudioSource>().enabled = true;
-		transform.position = new Vector3(1000, 1000, 1000);
+		
+		if(characterManager.triggetForDropObject == candleTrigger)
+		{
+			foreach (GameObject obj in candle)
+			{
+				obj.GetComponent<ParticleSystem>().Play();
+				candleTrigger.SetActive(false);
+				isCandle = true;
+			}
+		}
 	}
 }
