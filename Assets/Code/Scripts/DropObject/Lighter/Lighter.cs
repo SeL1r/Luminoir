@@ -22,7 +22,7 @@ public class Lighter : ObjectWhichDrop, IActivate
 		{
 			foreach (GameObject obj in candle)
 			{
-				obj.GetComponent<ParticleSystem>().Play();
+				obj.SetActive(true);
 				candleTrigger.SetActive(false);
 				isCandle = true;
 			}

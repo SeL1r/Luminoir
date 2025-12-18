@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -16,7 +17,8 @@ public class CharacterManager : MonoBehaviour
 	[SerializeField] private LayerMask interactableLayer, droptableLayer;
 	[SerializeField] private CharacterArm characterArm;
 	private int maxHeadAngleUp = 75, maxHeadAngleDown = -75;
-	private int distanceRay = 2;
+	private float distanceRay = 1.6f;
+	[SerializeField] private TMP_Text comment;
 	
 	
 	void Start()
@@ -51,11 +53,11 @@ public class CharacterManager : MonoBehaviour
 	{
 		triggetForDropObject = other.gameObject;
 	}
-    private void OnTriggerExit(Collider other)
-    {
-        triggetForDropObject = null;
-    }
-    private void MoveCharacter()
+	private void OnTriggerExit(Collider other)
+	{
+		triggetForDropObject = null;
+	}
+	private void MoveCharacter()
 	{
 		Vector2 valueVelocity = IAMove.ReadValue<Vector2>();
 		Vector3 move = transform.rotation * new Vector3(valueVelocity.x * speedCharacter, rb.linearVelocity.y, valueVelocity.y * speedCharacter);
@@ -80,6 +82,14 @@ public class CharacterManager : MonoBehaviour
 		RaycastHit hit;
 		hitObjectInteract = RayCast(ray, out hit, distanceRay, interactableLayer);
 		hitObjectDrop = RayCast(ray, out hit, distanceRay, droptableLayer);
+		if (hitObjectDrop != null || hitObjectInteract != null)
+		{
+			comment.text = "Нажать Е чтобы подобарть";
+		}
+		else
+		{	
+			comment.text = "";		
+		}
 	}
 	private GameObject RayCast(Ray ray, out RaycastHit hit, float distanceRay, LayerMask layerMask)
 	{
@@ -103,10 +113,7 @@ public class CharacterManager : MonoBehaviour
 	}
 	private void InteractInteractable()
 	{
-		if(hitObjectInteract == null)
-		{
-			return;
-		}
+		if(hitObjectInteract == null){return;}
 		if(hitObjectInteract.TryGetComponent<IInteractable>(out IInteractable interactable))
 		{
 			interactable.InteractObject();
@@ -115,7 +122,10 @@ public class CharacterManager : MonoBehaviour
 	private void InteractDroptable()
 	{
 		if(hitObjectDrop == null){return;}
-		if(characterArm.inArm){return;}
+		if(characterArm.inArm)
+		{
+			return;
+		}
 		if(hitObjectDrop.TryGetComponent<IInteractable>(out IInteractable interactable1))
 		{
 			interactable1.InteractObject();
@@ -132,9 +142,9 @@ public class CharacterManager : MonoBehaviour
 	}
 	private void Active()
 	{
-		if(!IAActive.WasPressedThisFrame()){return;}
 		if(characterArm.objectInArm == null){return;}
 		if(triggetForDropObject == null){return;}
+		if(!IAActive.WasPressedThisFrame()){return;}
 		if(characterArm.objectInArm.TryGetComponent<IActivate>(out IActivate iactivate))
 		{
 			iactivate.ActiveObject();

@@ -23,6 +23,7 @@ public class CharacterSanity : MonoBehaviour
 	[SerializeField] private GameObject fire;
 	[SerializeField] private Lighter lighter;
 	[SerializeField] private GameObject warping;
+	[SerializeField] private Animator shakeCam;
 	
 	void Start()
 	{
@@ -40,9 +41,11 @@ public class CharacterSanity : MonoBehaviour
 			yield return new WaitForSecondsRealtime(0.1f);
 			if (Sanity >= 30) 
 			{
+				shakeCam.SetBool("IsShake", false);
 				warping.SetActive(false);
 				continue;
 			}
+			shakeCam.SetBool("IsShake", true);
 			warping.SetActive(true);			
 		}
 	}
