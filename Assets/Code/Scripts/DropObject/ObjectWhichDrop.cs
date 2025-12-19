@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class ObjectWhichDrop : MonoBehaviour, IDroptable, IInteractable
 {
@@ -6,6 +7,8 @@ public class ObjectWhichDrop : MonoBehaviour, IDroptable, IInteractable
 	public CharacterManager characterManager {get; private set;}
 	[SerializeField] private Transform arm;
 	[SerializeField] private Transform characterDropPos;
+	public TMP_Text activeComment;
+	public bool isInteract{get; private set;} = false;
 	private float dropForce = 1;
 
 	void Start()
@@ -21,10 +24,12 @@ public class ObjectWhichDrop : MonoBehaviour, IDroptable, IInteractable
 	{
 		transform.position = characterDropPos.position;
 		rb.AddForce(characterDropPos.forward * dropForce, ForceMode.Impulse);
+		isInteract = false;
 	}
 	public void InteractObject()
 	{
 		transform.position = arm.position;
 		transform.rotation = arm.rotation;
+		isInteract = true;
 	}
 }

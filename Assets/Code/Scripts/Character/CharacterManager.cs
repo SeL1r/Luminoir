@@ -13,7 +13,7 @@ public class CharacterManager : MonoBehaviour
 	private float maxHeadAngle;
 	public GameObject hitObjectInteract {get;private set;}
 	public GameObject hitObjectDrop {get;private set;}
-	public GameObject triggetForDropObject {get;private set;}
+	public GameObject triggetForDropObject;
 	[SerializeField] private LayerMask interactableLayer, droptableLayer;
 	[SerializeField] private CharacterArm characterArm;
 	private int maxHeadAngleUp = 75, maxHeadAngleDown = -75;
@@ -82,9 +82,13 @@ public class CharacterManager : MonoBehaviour
 		RaycastHit hit;
 		hitObjectInteract = RayCast(ray, out hit, distanceRay, interactableLayer);
 		hitObjectDrop = RayCast(ray, out hit, distanceRay, droptableLayer);
-		if (hitObjectDrop != null || hitObjectInteract != null)
+		if (hitObjectDrop != null && !characterArm.inArm || hitObjectInteract != null)
 		{
 			comment.text = "Нажать Е чтобы подобарть";
+		}
+		else if(hitObjectDrop != null && characterArm.inArm)
+		{
+			comment.text = "Нажать Q чтобы выкинуть предмет";
 		}
 		else
 		{	

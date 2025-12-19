@@ -1,4 +1,3 @@
-using UnityEditor.Build;
 using UnityEngine;
 
 public class Lighter : ObjectWhichDrop, IActivate
@@ -8,6 +7,19 @@ public class Lighter : ObjectWhichDrop, IActivate
 	[SerializeField] private GameObject[] candle;
 	public bool isFire{get; private set;} = false;
 	public bool isCandle{get; private set;} = false;
+
+	void Update()
+	{
+		if (!isInteract){return;}
+		if(characterManager.triggetForDropObject == fireTrigger || characterManager.triggetForDropObject == candleTrigger)
+		{
+			activeComment.text = "Нажать ЛКМ чтобы поджечь";
+		}
+		else
+		{
+			activeComment.text = "";
+		}
+	}
 	public void ActiveObject()
 	{
 		if(characterManager.triggetForDropObject == fireTrigger)
@@ -16,6 +28,7 @@ public class Lighter : ObjectWhichDrop, IActivate
 			fire.GetComponent<ParticleSystem>().Play();
 			fire.GetComponent<AudioSource>().enabled = true;
 			isFire = true;
+			characterManager.triggetForDropObject = null;
 		}
 		
 		if(characterManager.triggetForDropObject == candleTrigger)
@@ -23,9 +36,9 @@ public class Lighter : ObjectWhichDrop, IActivate
 			foreach (GameObject obj in candle)
 			{
 				obj.SetActive(true);
-				candleTrigger.SetActive(false);
-				isCandle = true;
 			}
+			candleTrigger.SetActive(false);
+			isCandle = true;
 		}
 	}
 }

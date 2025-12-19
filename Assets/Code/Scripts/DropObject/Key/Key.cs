@@ -5,6 +5,19 @@ public class Key : ObjectWhichDrop, IActivate
 {
 	[SerializeField] private GameObject myDoor;
 	[SerializeField] private GameObject myTriggerDoor;
+
+	void Update()
+	{
+		if (!isInteract){return;}
+		if(characterManager.triggetForDropObject == myTriggerDoor)
+		{
+			activeComment.text = "Нажать ЛКМ чтобы открыть";
+		}
+		else
+		{
+			activeComment.text = "";
+		}
+	}
 	public void ActiveObject()
 	{
 		
@@ -12,6 +25,7 @@ public class Key : ObjectWhichDrop, IActivate
 		transform.position = new Vector3(1000, 1000, 1000);
 		myTriggerDoor.SetActive(false);
 		StartCoroutine(OpenDoorWithDelay());
+		characterManager.triggetForDropObject = null;
 	}
 	private IEnumerator OpenDoorWithDelay()
 	{
