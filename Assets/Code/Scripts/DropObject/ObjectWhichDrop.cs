@@ -20,13 +20,13 @@ public class ObjectWhichDrop : MonoBehaviour, IDroptable, IInteractable
 	   rb = GetComponent<Rigidbody>();
 	   characterManager = FindAnyObjectByType<CharacterManager>();
 	}
-	public void DropObject()
+	public virtual void DropObject()
 	{
 		transform.position = characterDropPos.position;
 		rb.AddForce(characterDropPos.forward * dropForce, ForceMode.Impulse);
 		isInteract = false;
 	}
-	public void InteractObject()
+	public virtual void InteractObject()
 	{
 		transform.position = arm.position;
 		transform.rotation = arm.rotation;

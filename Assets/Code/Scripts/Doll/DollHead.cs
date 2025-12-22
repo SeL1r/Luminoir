@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Doll : MonoBehaviour
+public class DollHead : MonoBehaviour
 {
 	[SerializeField] private Transform character;
 

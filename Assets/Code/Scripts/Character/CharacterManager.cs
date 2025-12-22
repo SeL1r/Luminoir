@@ -19,6 +19,7 @@ public class CharacterManager : MonoBehaviour
 	private int maxHeadAngleUp = 75, maxHeadAngleDown = -75;
 	private float distanceRay = 1.6f;
 	[SerializeField] private TMP_Text comment;
+	private bool interactTryGet, dropTryGet;
 	
 	
 	void Start()
@@ -82,6 +83,7 @@ public class CharacterManager : MonoBehaviour
 		RaycastHit hit;
 		hitObjectInteract = RayCast(ray, out hit, distanceRay, interactableLayer);
 		hitObjectDrop = RayCast(ray, out hit, distanceRay, droptableLayer);
+		
 		if (hitObjectDrop != null && !characterArm.inArm || hitObjectInteract != null)
 		{
 			comment.text = "Нажать Е чтобы подобарть";
@@ -126,10 +128,7 @@ public class CharacterManager : MonoBehaviour
 	private void InteractDroptable()
 	{
 		if(hitObjectDrop == null){return;}
-		if(characterArm.inArm)
-		{
-			return;
-		}
+		if(characterArm.inArm){return;}
 		if(hitObjectDrop.TryGetComponent<IInteractable>(out IInteractable interactable1))
 		{
 			interactable1.InteractObject();

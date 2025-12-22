@@ -10,6 +10,10 @@ public class Lighter : ObjectWhichDrop, IActivate
 
 	void Update()
 	{
+		Hand();
+	}
+	private void Hand()
+	{
 		if (!isInteract){return;}
 		if(characterManager.triggetForDropObject == fireTrigger || characterManager.triggetForDropObject == candleTrigger)
 		{

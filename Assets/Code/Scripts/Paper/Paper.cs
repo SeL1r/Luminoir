@@ -24,6 +24,10 @@ public class Paper : MonoBehaviour, IInteractable
 			change = Mathf.MoveTowards(change, 1, Time.deltaTime);
 			material.material.SetFloat("_transparency", change);
 		}
+		if(change == 1)
+		{
+			gameObject.SetActive(false);
+		}
 	}
 	public void InteractObject()
 	{
