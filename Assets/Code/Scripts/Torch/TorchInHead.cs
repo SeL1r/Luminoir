@@ -10,6 +10,7 @@ public class TorchInHead : MonoBehaviour
 	[SerializeField] private Torch torch;
 	[SerializeField] private Light lightTorch;
 	[SerializeField] private Image chargeBar;
+	[SerializeField] private AudioSource onTorch;
 	private InputAction IAActiveTorch;
 	public bool isTorch {get; private set;} = true;
 	private bool isPicked = false;
@@ -47,6 +48,7 @@ public class TorchInHead : MonoBehaviour
 		if (!isPicked){return;}
 		if (IAActiveTorch.WasPressedThisFrame())
 		{
+			onTorch.Play();
 			if (isTorch)
 			{
 				lightTorch.enabled = false;

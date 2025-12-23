@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Paper : MonoBehaviour, IInteractable
 {
 	[SerializeField] private GameObject textInPaper;
+	[SerializeField] private AudioSource pickUp;
 	private bool isFinishRead = false;
 	private float change;
 	private Material instanceMaterial;
@@ -31,6 +32,7 @@ public class Paper : MonoBehaviour, IInteractable
 	}
 	public void InteractObject()
 	{
+		pickUp.Play();
 		Cursor.lockState = CursorLockMode.Confined;
 		Cursor.visible = true;
 		Time.timeScale = 0;

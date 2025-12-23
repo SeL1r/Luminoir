@@ -5,6 +5,7 @@ public class Lighter : ObjectWhichDrop, IActivate
 	[SerializeField] private GameObject fire;
 	[SerializeField] private GameObject fireTrigger, candleTrigger;
 	[SerializeField] private GameObject[] candle;
+	[SerializeField] private AudioSource active;
 	public bool isFire{get; private set;} = false;
 	public bool isCandle{get; private set;} = false;
 
@@ -26,6 +27,7 @@ public class Lighter : ObjectWhichDrop, IActivate
 	}
 	public void ActiveObject()
 	{
+		active.Play();
 		if(characterManager.triggetForDropObject == fireTrigger)
 		{
 			fireTrigger.SetActive(false);

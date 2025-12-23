@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
 	
@@ -7,15 +8,9 @@ public class GameManager : MonoBehaviour
 	{
 		LockCursoudInStartGame();
 	}
-	
 	private void LockCursoudInStartGame()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
-    }
-
-	void Update()
 	{
-		
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 }

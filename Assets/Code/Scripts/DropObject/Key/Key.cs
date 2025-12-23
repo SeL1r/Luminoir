@@ -8,6 +8,7 @@ public class Key : ObjectWhichDrop, IActivate
 	[SerializeField] private GameObject myTriggerDoor;
 	[SerializeField] private TMP_Text hand;
 	[SerializeField] private string door;
+	[SerializeField] private AudioSource openDoor;
 
 	void Update()
 	{
@@ -25,10 +26,11 @@ public class Key : ObjectWhichDrop, IActivate
 			activeComment.text = "";
 		}
 	}
-	public void ActiveObject()
+	public virtual void ActiveObject()
 	{
-		
 		if(characterManager.triggetForDropObject != myTriggerDoor){return;}
+		hand.text = "";
+		openDoor.Play();
 		transform.position = new Vector3(1000, 1000, 1000);
 		myTriggerDoor.SetActive(false);
 		StartCoroutine(OpenDoorWithDelay());
