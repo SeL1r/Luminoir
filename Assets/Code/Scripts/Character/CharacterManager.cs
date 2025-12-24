@@ -86,7 +86,7 @@ public class CharacterManager : MonoBehaviour
 		
 		if (hitObjectDrop != null && !characterArm.inArm || hitObjectInteract != null)
 		{
-			comment.text = "Нажать Е чтобы подобарть";
+			comment.text = "Нажать Е чтобы подобрать";
 		}
 		else if(hitObjectDrop != null && characterArm.inArm)
 		{
