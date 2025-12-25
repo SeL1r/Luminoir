@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -14,12 +15,15 @@ public class CharacterManager : MonoBehaviour
 	public GameObject hitObjectInteract {get;private set;}
 	public GameObject hitObjectDrop {get;private set;}
 	public GameObject triggetForDropObject;
-	[SerializeField] private LayerMask interactableLayer, droptableLayer;
+	[SerializeField] private LayerMask interactableLayer, droptableLayer, allLayers;
 	[SerializeField] private CharacterArm characterArm;
 	private int maxHeadAngleUp = 75, maxHeadAngleDown = -75;
-	private float distanceRay = 1.6f;
+	private float distanceRay = 2f;
 	[SerializeField] private TMP_Text comment;
 	private bool interactTryGet, dropTryGet;
+	GameObject inFront;
+	IInteractable interactableInFront;
+	IDroptable droptableInFront;
 	
 	
 	void Start()
@@ -45,7 +49,7 @@ public class CharacterManager : MonoBehaviour
 	void Update()
 	{
 		RotateCharacter();
-		Raycast();
+		CheckIfThereObjectInFront();
 		Interact();
 		DropObject();
 		Active();
@@ -76,63 +80,50 @@ public class CharacterManager : MonoBehaviour
 		}		
 	}
 	
-	private void Raycast()
+	private void CheckIfThereObjectInFront()
 	{
-		Vector3 centerPoint = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-		Ray ray = Camera.main.ScreenPointToRay(centerPoint);
-		RaycastHit hit;
-		hitObjectInteract = RayCast(ray, out hit, distanceRay, interactableLayer);
-		hitObjectDrop = RayCast(ray, out hit, distanceRay, droptableLayer);
-		
-		if (hitObjectDrop != null && !characterArm.inArm || hitObjectInteract != null)
+		GameObject inFrontNew = ObjectInFront(distanceRay, allLayers);
+		if (inFrontNew == inFront){return;}
+		inFront = inFrontNew;
+		if (inFront == null)
+		{ 
+			interactableInFront = null; 
+			droptableInFront = null;
+			comment.text = "";
+			return;
+		}
+		interactableInFront = inFront.GetComponent<IInteractable>();
+		if (inFront.TryGetComponent<IDroptable>(out IDroptable droptable))
 		{
-			comment.text = "Нажать Е чтобы подобрать";
+			droptableInFront = droptable;
+			if(characterArm.inArm){comment.text = "Нажать Q чтобы выкинуть предмет";}
+			else{comment.text = "Нажать Е чтобы подобрать";}
+			return;
 		}
-		else if(hitObjectDrop != null && characterArm.inArm)
-		{
-			comment.text = "Нажать Q чтобы выкинуть предмет";
-		}
-		else
-		{	
-			comment.text = "";		
-		}
+		comment.text = "";
 	}
-	private GameObject RayCast(Ray ray, out RaycastHit hit, float distanceRay, LayerMask layerMask)
+	
+	
+	
+	
+	
+	private GameObject ObjectInFront(float distanceRay, LayerMask layerMask)
 	{
-		GameObject gameObject;
+		Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit, distanceRay, layerMask))
 		{
-			gameObject = hit.collider.gameObject;
+			return hit.collider.gameObject;
 		}
-		else
-		{
-			gameObject = null;
-		}
-		return gameObject;
+		return null;
 	}
 	
 	private void Interact()
 	{
-		if(!IAInteract.WasPressedThisFrame()) {return;}
-		InteractInteractable();
-		InteractDroptable();
-	}
-	private void InteractInteractable()
-	{
-		if(hitObjectInteract == null){return;}
-		if(hitObjectInteract.TryGetComponent<IInteractable>(out IInteractable interactable))
-		{
-			interactable.InteractObject();
-		}
-	}
-	private void InteractDroptable()
-	{
-		if(hitObjectDrop == null){return;}
-		if(characterArm.inArm){return;}
-		if(hitObjectDrop.TryGetComponent<IInteractable>(out IInteractable interactable1))
-		{
-			interactable1.InteractObject();
-		}
+		if(!IAInteract.WasPressedThisFrame()){return;}
+		if(droptableInFront != null && !characterArm.inArm && interactableInFront != null){interactableInFront.InteractObject(); return;}
+		if(interactableInFront != null){interactableInFront.InteractObject();}
+		
 	}
 	private void DropObject()
 	{

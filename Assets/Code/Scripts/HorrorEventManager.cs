@@ -35,7 +35,7 @@ public class HorrorEventManager : MonoBehaviour
 	{
 		while(true)
 		{
-			yield return new WaitForSecondsRealtime(Random.Range(5,10));
+			yield return new WaitForSecondsRealtime(Random.Range(30,60));
 			isStartHorrorEvent = true;
 			horrorIndex = Random.Range(0, horrorEvent.Count);
 			horrorEvent[horrorIndex].Play();
